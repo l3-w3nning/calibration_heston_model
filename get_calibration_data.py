@@ -12,9 +12,7 @@ def get_calibration_data():
     :return: dataframe of option chain (for heston model) (df_db) and data of data base with option with max volume (for bs calibration)
     """
     data_option = set_option_data("AAPL", "2023-12-12")
-    data_option_bs_calibration = data_option[
-        4
-    ]  # only used for black scholes calibration
+    data_option_bs_calibration = data_option[4]  # only used for black scholes calibration
 
     dbconn = sqlite3.connect("/home/leo/Documents/OptionPricing/optionpricing.db")
     curs = dbconn.cursor()
@@ -46,4 +44,4 @@ def get_calibration_data():
         }
     )
 
-    return [data_option_bs_calibration[4], df_db]
+    return [data_option_bs_calibration, df_db]

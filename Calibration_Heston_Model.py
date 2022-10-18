@@ -120,9 +120,9 @@ def wrapper_lsq(x):
     N = len(strikes)
 
     heston_price = wrapper_heston(
-        x, yield_ts, dividend_ts, ql.QuoteHandle(ql.SimpleQuote(spot)), seed=2
+        x,  ql.QuoteHandle(ql.SimpleQuote(spot)), seed=2
     )
-    print(heston_price)
+    print("the basin hopping algorithm currently hops to stock price: ",heston_price)
     for i in range(N):
         lsq = (optionval(heston_price, strikes[i]) - option_prices_market[i]) ** 2
 
@@ -154,6 +154,6 @@ class RandomDisplacementBounds(object):
 
 def calibration_heston(wrapper_lsq, x0, minimizer_kwargs, bounded_step):
     ret = basinhopping(
-        wrapper_lsq, x0, minimizer_kwargs=minimizer_kwargs, take_step=bounded_step
+        wrapper_lsq, x0,niter=300, minimizer_kwargs=minimizer_kwargs, take_step=bounded_step
     )
     return ret
