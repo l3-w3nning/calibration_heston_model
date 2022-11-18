@@ -124,7 +124,7 @@ def wrapper_lsq(x):
     )
     print("the basin hopping algorithm currently hops to stock price: ",heston_price)
     for i in range(N):
-        lsq = (optionval(heston_price, strikes[i]) - option_prices_market[i]) ** 2
+        lsq = np.sqrt((optionval(heston_price, strikes[i]) - option_prices_market[i]) ** 2)
 
     lsq = lsq / N
 
